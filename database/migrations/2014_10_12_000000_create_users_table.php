@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('avatar')->nullable();
             $table->string('password');
-            $table->enum('status',['Active','Suspended']);
+            $table->enum('status',['Active','Pending','Suspended'])->defualt('Pending');
             $table->rememberToken();
             $table->timestamps();
         });
