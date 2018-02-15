@@ -15,12 +15,12 @@ class CreateDownloadsTable extends Migration
     {
         Schema::create('downloads', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('download_category_id')->unisgned();
-            $table->string('file_path');
+            $table->string('filename');
+			$table->string('mime');
+			$table->string('original_filename');
             $table->timestamps();
 
-            $table->index('name');
+            $table->index('filename');
         });
     }
 

@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/downloadform', function() {
+    return view('admins.downloadform');
+});
+
+Route::post('/downloadform',['uses'=>'DownloadController@store']);

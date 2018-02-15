@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Download;
+ 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
+ 
+
 class DownloadController extends Controller
 {
     /**
@@ -13,19 +20,10 @@ class DownloadController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $downloadbales = Download::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.downloads', compact('downloadbales'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +32,29 @@ class DownloadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!$request->hasFile($request->input('filefield')))
+            return redirect()->back()->withErrors('Choose a file to upload first');
+
+        $file = $request->file('filefield');
+        $extension = $file->getClientOriginalExtension();
+        //dd($extension);
+        if($extension != 'pdf')
+            return redirect()->back()->withErrors('File format not support ');
+        if($extension != 'exe')
+            return redirect()->back()->withErrors('File format not support ');
+
+            $file->store('/public/downloads/'.$extension);
+        //Storage::disk('local')->putFileAs($file->getFilename().'.'.$extension,  File::get($file),'public');
+
+		$dowbloadablefile = new Download();
+		$dowbloadablefile->mime = $file->getClientMimeType();
+		$dowbloadablefile->original_filename = $file->getClientOriginalName();
+		$dowbloadablefile->filename = $file->getFilename().'.'.$extension;
+ 
+		$dowbloadablefile->save();
+ 
+		//return redirect('/');
+      
     }
 
     /**

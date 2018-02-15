@@ -12,6 +12,6 @@ class Download extends Model
      * @var array
      */
     protected $fillable = [
-        'name','download_category_id','file_path'
+        'filename','mime','original_filename'
     ];
 }
