@@ -38,13 +38,11 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
+                <div class="form-group">
+                    <div class="col-md-12">
+                    <div class="checkbox checkbox-info pull-left p-t-0">
+                        <input id="checkbox-signup" type="checkbox">
+                        <label for="checkbox-signup"> Remember me </label>
                                 </div>
                             </div>
                         </div>
