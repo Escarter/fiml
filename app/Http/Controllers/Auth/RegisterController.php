@@ -51,13 +51,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'sex' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone' => 'required',
+            'sex' => 'required',
+            'location' => 'required',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -76,7 +75,6 @@ class RegisterController extends Controller
                     'phone' => $data['phone'],
                     'sex' => $data['sex'],
                     'location' => $data['location'],
-                    'username' => $data['username'],
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
                 ]);
@@ -96,14 +94,12 @@ class RegisterController extends Controller
         $validator = $this->validator($request->all());
         if ($validator->fails())
         {
-           $this->throwValidationException(
-               $request, $validator
-           );
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $this->create($request->all());
 
-        return redirect('/login')->withInfo('Almsot there! Please check your email for verification.');
+        return redirect('/login')->with('status','Congrats for your registration login to join the amazing family.');
     }
 
 

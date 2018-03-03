@@ -22,7 +22,7 @@ class User extends Authenticatable implements CanResetPassword
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','phone','avatar','sex','location', 'email','username','status', 'password'
+        'first_name','last_name','phone','avatar','sex','location', 'email','status', 'password'
     ];
 
     /**

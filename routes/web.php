@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,4 +23,12 @@ Route::get('/downloadform', function() {
     return view('admins.downloadform');
 });
 
-Route::post('/downloadform',['uses'=>'DownloadController@store']);
+
+Route::group(['prefix' => 'user'], function() {
+    Route::get('/dashboard', ['as'=>'users-dashboard','uses'=>'UserController@getDashboard']);
+});
+
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/dashboard',['as'=>'admin-dashboard','uses'=>'AdminController@getDaboard']);
+});

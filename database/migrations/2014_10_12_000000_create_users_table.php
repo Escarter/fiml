@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('sex');
             $table->string('location');
-            $table->string('username');
             $table->string('avatar')->nullable();
             $table->string('password');
             $table->enum('status',['Active','Pending','Suspended'])->defualt('Pending');
