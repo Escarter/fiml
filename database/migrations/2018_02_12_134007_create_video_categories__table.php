@@ -16,10 +16,11 @@ class CreateVideoCategoriesTable extends Migration
         Schema::create('video_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('tag');
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->index('name');
+            $table->index('tag');
         });
     }
 

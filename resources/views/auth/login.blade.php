@@ -1,78 +1,69 @@
 @extends('layouts.auth-master')
 
 @section('content')
-<section id="wrapper" class="new-login-register" >
-    <div class="lg-info-panel">
-        <div class="inner-panel">
-            <a href="javascript:void(0)" class="p-20 di"><img src="{{asset('plugins/images/admin-logo.png')}}"></a>
-            <div class="lg-content">
-                <h2>THE ULTIMATE & MULTIPURPOSE ADMIN TEMPLATE OF 2017</h2>
-                <p class="text-muted">with this admin you can get 2000+ pages, 500+ ui component, 2000+ icons, different demos and many more... </p>
-                <a href="#" class="btn btn-rounded btn-danger p-l-20 p-r-20"> </a>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="right-column sisu">
+            <div class="row mx-0">
+                <div class="col-md-7 order-md-2 signin-right-column px-5 bg-dark">
+                    <a class="signin-logo d-sm-block d-md-none" href="#">
+                        <img src="img/logo-white.png" width="145" height="32.3" alt="QuillPro">
+                    </a>
+                    <h1 class="display-4">Sign In To get Started</h1>
+                    <p class="lead mb-5">
+                        Big data latte SpaceTeam unicorn cortado hacker physical computing paradigm.
+                    </p>
+                </div>
+                <div class="col-md-5 order-md-1 signin-left-column bg-white px-5">
+                    <a class="signin-logo d-sm-none d-md-block" href="#">
+                        <img src="img/logo-dark.png" width="145" height="32.3" alt="QuillPro">
+                    </a>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Enter email" required autofocus>
+                            <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                            @if ($errors->has('email'))
+                                <span class="help-block with-errors" >
+                                    <p class="text-danger" >{{ $errors->first('email') }}</p>
+                                </span>
+                            @else
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>                            
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"  placeholder="Password" required>
+                            <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
+                            @if ($errors->has('password'))
+                                <span class="help-block with-errors" >
+                                    <p class="text-danger" >{{ $errors->first('password') }}</p>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <!-- <input type="checkbox" class="custom-control-input" id="keep-signed-in"> -->
+                            <input type="checkbox" name="remember" id="keep-signed-in" class="custom-control-input" {{ old('remember') ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="keep-signed-in">{{ __('Remember Me') }}</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-gradient btn-block">
+                            <i class="batch-icon batch-icon-key"></i>
+                            Sign In
+                        </button>
+                        <hr>
+                        <p class="text-center">
+                            Don't have an account? <a href="/register" class="text-primary m-l-5"><b>Sign Up</b></a>
+                        </p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <div class="new-login-box">
-        <div class="white-box">
-            <h3 class="box-title m-b-0">Sign In to FIML</h3>
-            <small>Enter your details below</small>
-            <br>
-            <!-- @include('layouts.partials.normal-notifications') -->
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-            <form class="form-horizontal new-lg-form" id="loginform" method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="form-group  m-t-20">
-                    <div class="col-xs-12">
-                        <input type="text" name="email" placeholder="Email Address" class="form-control{{ $errors->has('email') ? ' has-error' : '' }}"  value="{{ old('email') }}" required autofocus>
-                        @if ($errors->has('email'))
-                            <span class="help-block with-errors" >
-                                <p class="text-danger" >{{ $errors->first('email') }}</p>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input type="password" name="password" placeholder="Password" class="form-control{{ $errors->has('password') ? ' has-error' : '' }}"  required>
-                    </div>
-                    @if ($errors->has('password'))
-                        <span class="help-block with-errors" >
-                            <p class="text-danger" >{{ $errors->first('password') }}</p>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                    <div class="checkbox checkbox-info pull-left p-t-0">
-                        <input id="checkbox-signup" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <label for="checkbox-signup"> Remember me </label>
-                    </div>
-                    <a href="{{ route('password.request')}}"  class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
-                </div>
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                    <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Log In</button>
-                    </div>
-                </div>
-                <div class="form-group m-b-0">
-                    <div class="col-sm-12 text-center">
-                    <p>Don't have an account? <a href="/register" class="text-primary m-l-5"><b>Sign Up</b></a></p>
-                    </div>
-                </div>
-            </form>    
-        </div>
-    </div>  
-</section>
+</div>
 @endsection
 @section('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.notification').alert()
-    });
-</script>
+
 @endsection
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\User;
+
 class AdminController extends Controller
 {
 
@@ -16,73 +18,62 @@ class AdminController extends Controller
     public function getDashboard()
     {
 
-        return  view('admin.dashboard');//->compact([''=>]);
+        return  view('admins.dashboard');//->compact([''=>]);
     }
 
 
     /**
-     * get all users
-     */
-
-     public function getAllUsers()
-     {
-         $users = User::orderBy('first_name','DESC')->paginate(40);
-
-         //return view('admin')->compact(['users'=>$users]);
-     }
-
-    /**
-     * Show the form for creating a new resource.
+     * Users Manangement Section
      *
      * @return \Illuminate\Http\Response
      */
-    public function getUserCreationForm()
+    public function getUsersManagement()
     {
-        
-        return view('admin.partials.createUser');
+        $users = User::orderBy('first_name','DESC')->paginate(50);
+
+        return view('admins.users-management')->with(['users'=>$users]);
     }
-    
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Create New User
      */
-    public function storeNewUser(Request $request)
+    public function createUser(Request $request)
     {
         $validator = $this->validator($request->all());
 
         if($validator->fails()){
-            return redirect()->back()->withErrors('');
+            return redirect()->back()->withErrors($validator);
         }
+        $dob = date("Y-m-d H:i:s",strtotime($request->input('dob')));
         $user =  User::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'phone' => $request->input('phone'),
             'sex' => $request->input('sex'),
+            'status' => $request->input('status'),
             'location' => $request->input('location'),
-            'username' => $request->input('username'),
+            'dob' =>  $dob,
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
         ]);
-        $user->asign($request->input('role'));
+        $role = $request->input('role');
+        $user->assign($role);
 
         return redirect()->back()->withInfo('New user '.$user->first_name.' was successfully created!');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Edit user
      */
     public function editUser($id)
     {
         try{
             $user = User::findOrFail($id);
 
+            $role = $user->roles()->first()->name;
+
             return response()->json([
                 'data' =>$user,
+                'role'=>$role,
                 'status' =>'success'
             ]);
         }catch(\Exception $e){
@@ -92,27 +83,35 @@ class AdminController extends Controller
             ]);
         }
     }
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Update users information
      */
     public function updateUser(Request $request)
     {
-        $validator = $this->validator($request->all());
+
+        dd($request);
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'sex' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255']);
 
         if($validator->fails()){
-            return redirect()->back()->withErrors('');
+            return redirect()->back()->withErrors($validator);
         }
+
         $user = User::findOrFail($request->input('id'));
+        $dob = date("Y-m-d H:i:s",strtotime($request->input('dob')));
         $user->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'phone' => $request->input('phone'),
+            'dob' => $dob,
             'sex' => $request->input('sex'),
             'location' => $request->input('location'),
-            'username' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => $request->input('password') == NULL ? $user->password :  bcrypt($request->input('password')),
         ]);
@@ -120,54 +119,36 @@ class AdminController extends Controller
         if($user->roles()->first()->name <> $request->input('role')){
             $role = Role::where('name',$request->input('role'))->first();
             $user->roles()->sync($role);
+        }else{
+            
         }
-        return redirect()->back()->withInfo('New user '.$user->first_name.' was successfully created!');
+
+        return redirect()->back()->withInfo($user->first_name.' Info was successfully Updated!');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete a user
      */
-    public function show($id)
+    public function deleteUser($id)
     {
-        //
+        try{
+            $user = User::findOrFail($id);
+
+            $user->delete();
+
+            return response()->json([
+                'status' =>'success'
+            ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => 'error'
+            ]);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 
     /**
      * Get a validator for an incoming registration request for a user.
@@ -183,7 +164,6 @@ class AdminController extends Controller
             'phone' => 'required|string|max:255',
             'sex' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);

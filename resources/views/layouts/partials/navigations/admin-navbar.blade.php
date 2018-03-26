@@ -1,92 +1,207 @@
-<!-- ============================================================== -->
-<!-- Topbar header - style you can find in pages.scss -->
-<!-- ============================================================== -->
-<nav class="navbar navbar-default navbar-static-top m-b-0">
-    <div class="navbar-header">
-        <div class="top-left-part">
-            <!-- Logo -->
-            <a class="logo" href="index.html">
-                <!-- Logo icon image, you can use font-icon also --><b>
-                <!--This is dark logo icon--><img src="../plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="../plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
-                </b>
-                <!-- Logo text image you can use text also --><span class="hidden-xs">
-                <!--This is dark logo text--><img src="../plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="../plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
-                </span> </a>
-        </div>
-        <!-- /Logo -->
-        <!-- Search input and Toggle icon -->
-        <ul class="nav navbar-top-links navbar-left">
-            <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
-                    <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                </a>
-                <ul class="dropdown-menu mailbox animated bounceInDown">
-                    <li>
-                        <div class="drop-title">You have 4 new messages</div>
-                    </li>
-                    <li>
-                        <div class="message-center">
-                            <a href="#">
-                                <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
-                            </a>
-                            <a href="#">
-                                <div class="user-img"> <img src="../plugins/images/users/sonu.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </div>
-                            </a>
-                            <a href="#">
-                                <div class="user-img"> <img src="../plugins/images/users/arijit.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </div>
-                            </a>
-                            <a href="#">
-                                <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
-                            </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <a class="navbar-brand d-block d-sm-block d-md-block d-lg-none" href="#">
+        <img src="assets/img/logo-dark.png" width="145" height="32.3" alt="QuillPro">
+    </a>
+    <button class="hamburger hamburger--slider" type="button" data-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle Sidebar">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+    <!-- Added Mobile-Only Menu -->
+    <ul class="navbar-nav ml-auto mobile-only-control d-block d-sm-block d-md-block d-lg-none">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbar-notification-search-mobile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                <i class="batch-icon batch-icon-search"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search-mobile">
+                <li>
+                    <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-gradient waves-effect waves-light" type="button">
+                                    <i class="batch-icon batch-icon-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                    </li>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--  DEPRECATED CODE:
+        <div class="navbar-collapse" id="navbarSupportedContent">
+    -->
+    <!-- USE THIS CODE Instead of the Commented Code Above -->
+    <!-- .collapse added to the element -->
+    <div class="collapse navbar-collapse" id="navbar-header-content">
+        <ul class="navbar-nav navbar-language-translation mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbar-dropdown-menu-link" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <i class="batch-icon batch-icon-book-alt-"></i>
+                    English
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-menu-link">
+                    <li><a class="dropdown-item" href="#">Français</a></li>
+                    <li><a class="dropdown-item" href="#">Deutsche</a></li>
+                    <li><a class="dropdown-item" href="#">Español</a></li>
                 </ul>
-                <!-- /.dropdown-messages -->
             </li>
         </ul>
-        <ul class="nav navbar-top-links navbar-right pull-right">
-            <li>
-                <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                    <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b><span class="caret"></span> </a>
-                <ul class="dropdown-menu dropdown-user animated flipInY">
+        <ul class="navbar-nav navbar-notifications float-right">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbar-notification-search" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <i class="batch-icon batch-icon-search"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-fullscreen" aria-labelledby="navbar-notification-search">
                     <li>
-                        <div class="dw-user-box">
-                            <div class="u-img"><img src="../plugins/images/users/varun.jpg" alt="user" /></div>
-                            <div class="u-text"><h4>Steave Jobs</h4><p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
-                        </div>
+                        <form class="form-inline my-2 my-lg-0 no-waves-effect">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary btn-gradient waves-effect waves-light" type="button">Search</button>
+                                </div>
+                            </div>
+                        </form>
                     </li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
                 </ul>
-                <!-- /.dropdown-user -->
             </li>
-            
-            <!-- /.dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle no-waves-effect" id="navbar-notification-calendar" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <i class="batch-icon batch-icon-calendar"></i>
+                    <span class="notification-number">6</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-md" aria-labelledby="navbar-notification-calendar">
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-calendar batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Meeting with Project Manager</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">Right now</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-calendar batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Sales Call</h6>
+                                <div class="notification-text">
+                                    Nibh amet cras sit libero
+                                </div>
+                                <span class="notification-time">One hour from now</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-calendar batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Email CEO new expansion proposal</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">In 3 days</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-calendar batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Team building exercise</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">In one week</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle no-waves-effect" id="navbar-notification-misc" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <i class="batch-icon batch-icon-bell"></i>
+                    <span class="notification-number">4</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-md" aria-labelledby="navbar-notification-misc">
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-bell batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">General Notification</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">Just now</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-cloud-download batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Your Download Is Ready</h6>
+                                <div class="notification-text">
+                                    Nibh amet cras sit libero
+                                </div>
+                                <span class="notification-time">5 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-tag-alt-2 batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">New Order</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">Yesterday</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="media">
+                        <a href="task-list.html">
+                            <i class="batch-icon batch-icon-pull batch-icon-xl d-flex mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-1 notification-heading">Pull Request</h6>
+                                <div class="notification-text">
+                                    Cras sit amet nibh libero
+                                </div>
+                                <span class="notification-time">3 day ago</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-5 navbar-profile">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbar-dropdown-navbar-profile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                    <div class="profile-name">
+                        Johanna Quinn
+                    </div>
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right">
+                        <img src="assets/img/profile-pic.jpg" width="44" height="44">
+                    </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown-navbar-profile">
+                    <li><a class="dropdown-item" href="profiles-member-profile.html">Profile</a></li>
+                    <li>
+                        <a class="dropdown-item" href="mail-inbox.html">
+                            Messages 
+                            <span class="badge badge-danger badge-pill float-right">3</span>
+                        </a>
+                    </li>
+                    <li><a class="dropdown-item" href="profiles-member-profile.html">Settings</a></li>
+                    <li><a class="dropdown-item" href="sisu-lock-screen.html">Logout</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
-    <!-- /.navbar-header -->
-    <!-- /.navbar-top-links -->
-    <!-- /.navbar-static-side -->
 </nav>
-<!-- End Top Navigation -->

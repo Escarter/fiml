@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'phone' => 'required',
             'sex' => 'required',
             'location' => 'required',
+            'dob'=>'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -69,11 +70,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $dob = date("Y-m-d H:i:s",strtotime($data['dob']));
         $user =  User::create([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
                     'phone' => $data['phone'],
                     'sex' => $data['sex'],
+                    'dob'=> $dob,
                     'location' => $data['location'],
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),

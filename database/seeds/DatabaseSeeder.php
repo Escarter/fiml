@@ -12,5 +12,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(RolesTableSeeder::class);
+         $this->call(VideoCategorySeeder::class);
+
+         $users = factory(App\Models\User::class, 1000)->create();
+
+         foreach ($users as $user) {
+             $user->assign('user');
+         }
+         $trainingContent = factory(App\Models\TrainingContent::class, 100)->create();
+
     }
 }

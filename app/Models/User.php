@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPassword;
 
 use App\Models\Role;
-use App\Models\Training;
+use App\Models\TrainingContent;
 use App\Models\Profit;
 use App\Models\Payment;
 use App\Models\Billing;
+use App\Models\Download;
 
 class User extends Authenticatable implements CanResetPassword
 {
@@ -22,7 +23,7 @@ class User extends Authenticatable implements CanResetPassword
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','phone','avatar','sex','location', 'email','status', 'password'
+        'first_name','last_name','phone','avatar','sex','location', 'email','status', 'dob','password'
     ];
 
     /**
@@ -120,5 +121,18 @@ class User extends Authenticatable implements CanResetPassword
       return $this->roles->first()->name;
     }
 
+    public function fullName()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
+    public function likedTrainingContents()
+    {
+        return $this->morphedByMany('App\Models\TrainingContent', 'likeable')->whereDeletedAt(null);
+    }
+    public function likedDownloadContents()
+    {
+        return $this->morphedByMany('App\Models\Download', 'likeable')->whereDeletedAt(null);
+    }
 
 }
