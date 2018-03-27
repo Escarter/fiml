@@ -1,10 +1,11 @@
 <div class="modal fade  " id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content p-2">
             <div class="modal-header">
+                <h4 class="modal-title" ><i class="mdi mdi-account-edit"></i> Edit User</h4> 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ><i class="mdi mdi-account-edit"></i> Edit User</h4> </div>
-            <div class="modal-body">
+            </div>
+            <div class="modal-body p-3">
                 <form method="POST" action="/admin/update" id="editUserForm">
                     @csrf
                     <div class="form-group row">
@@ -32,7 +33,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 col-xs-12">
-                            <input class="form-control mydatepicker" type="text"  name="dob" value="" required="" > 
+                            <input class="form-control datepicker" type="text"  name="dob" value="" required="" > 
                         </div>
                     </div>
                     <div class="form-group row ">
@@ -69,7 +70,7 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary"><i class="mdi mdi-account-edit"></i> Update User</button>
             </form>
             </div>

@@ -1,10 +1,13 @@
 <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content p-2">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel1"><i class="mdi mdi-account-plus"></i> Create New User</h4> </div>
-            <div class="modal-body">
+                <h4 class="modal-title" id="exampleModalLabel1"><i class="mdi mdi-account-plus"></i> Create New User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+            <div class="modal-body p-3">
                 <form method="POST" action="/admin/create-user">
                     @csrf
                     <input type="hidden" name="id" value="">
@@ -34,7 +37,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 col-xs-12">
-                            <input class="form-control mydatepicker" type="text"  name="dob" value="" required="" placeholder="Date of Birth"> 
+                            <input class="form-control datepicker" type="text"  name="dob" value="" required="" placeholder="Date of Birth"> 
                         </div>
                     </div>
                     <div class="form-group row ">
@@ -68,12 +71,11 @@
                             <input class="form-control" type="password"  name="password_confirmation" required="" placeholder="Confirm Password"> 
                         </div>
                     </div>
-                
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary"><i class="mdi mdi-account-plus"></i> Create User</button>
-            </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Create User</button>
             </div>
         </div>
     </div>

@@ -6,20 +6,17 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
-         $this->call(RolesTableSeeder::class);
-         $this->call(VideoCategorySeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(VideoCategorySeeder::class);
 
-         $users = factory(App\Models\User::class, 1000)->create();
+        $users = factory(App\Models\User::class, 10)->create();
 
-         foreach ($users as $user) {
-             $user->assign('user');
-         }
-         $trainingContent = factory(App\Models\TrainingContent::class, 100)->create();
-
+        foreach ($users as $user) {
+            $user->assign('user');
+        }
+        $trainingContent = factory(App\Models\TrainingContent::class, 100)->create();
     }
 }

@@ -27,23 +27,23 @@ Route::get('/downloadform', function () {
 });
 
 Route::group(['prefix' => 'users'], function () {
-    Route::get('/dashboard', ['as' => 'users-dashboard', 'uses' => 'UserController@getDashboard']);
+    Route::get('/dashboard', ['as' => 'users-dashboard', 'uses' => 'UserController@getDashboard'])->name('dasboard');
 
     //Get Training Content
-    Route::get('/training-content/{tag}', ['as' => 'training-content', 'uses' => 'UserController@getTrainingContent']);
+    Route::get('/training-content/{tag}', ['as' => 'training-content', 'uses' => 'UserController@getTrainingContent'])->name('users.training-content');
 
     //Get Downloadable content
-    Route::get('/downloadable-content/{type}', ['as' => 'downloadable-content', 'uses' => 'UserController@getDownloadContent']);
+    Route::get('/downloadable-content/{type}', ['as' => 'downloadable-content', 'uses' => 'UserController@getDownloadContent'])->name('users.downloadable-content');
 
     //Download file
-    Route::get('/download-file/{id}', ['as' => '/download-file', 'uses' => 'UserController@downloadFile']);
+    Route::get('/download-file/{id}', ['as' => '/download-file', 'uses' => 'UserController@downloadFile'])->name('users.download-file');
 
     // Manage Likes
-    Route::get('/training-content/like/{id}', ['as' => 'training-content.like', 'uses' => 'LikeController@likeTrainingContent']);
-    Route::get('/downloadable-content/like/{id}', ['as' => 'downloadable-content.like', 'uses' => 'LikeController@likeDownload']);
+    Route::get('/training-content/like/{id}', ['as' => 'training-content.like', 'uses' => 'LikeController@likeTrainingContent'])->name('users.like.training-content');
+    Route::get('/downloadable-content/like/{id}', ['as' => 'downloadable-content.like', 'uses' => 'LikeController@likeDownload'])->name('users.like.downloadable-content');
 
-    Route::get('/pricing', ['as' => 'billing-process', 'uses' => 'BillingController@index']);
-    Route::get('/chart/{plan_id}', ['as' => 'chart-processing', 'uses' => 'BillingController@chart']);
+    Route::get('/pricing', ['as' => 'billing-process', 'uses' => 'BillingController@index'])->name('users.pricing');
+    Route::get('/chart/{plan_id}', ['as' => 'chart-processing', 'uses' => 'BillingController@chart'])->name('users.chart');
 });
 
 Route::group(['prefix' => 'admin'], function () {

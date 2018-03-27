@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <a class="navbar-brand d-block d-sm-block d-md-block d-lg-none" href="#">
-        <img src="assets/img/logo-dark.png" width="145" height="32.3" alt="QuillPro">
+        <img src="{{asset('img/logo-dark.png')}}" width="145" height="32.3" alt="FIML">
     </a>
     <button class="hamburger hamburger--slider" type="button" data-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle Sidebar">
         <span class="hamburger-box">
@@ -184,22 +184,22 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbar-dropdown-navbar-profile" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
                     <div class="profile-name">
-                        Johanna Quinn
+                        {{Auth::user()->first_name}}
                     </div>
                     <div class="profile-picture bg-gradient bg-primary has-message float-right">
-                        <img src="assets/img/profile-pic.jpg" width="44" height="44">
+                        <img src="{{asset('img/profile-pic.jpg')}}" width="44" height="44">
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown-navbar-profile">
-                    <li><a class="dropdown-item" href="profiles-member-profile.html">Profile</a></li>
+                    <li><a class="dropdown-item" href="/users/settings">Profile</a></li>
                     <li>
                         <a class="dropdown-item" href="mail-inbox.html">
                             Messages 
                             <span class="badge badge-danger badge-pill float-right">3</span>
                         </a>
                     </li>
-                    <li><a class="dropdown-item" href="profiles-member-profile.html">Settings</a></li>
-                    <li><a class="dropdown-item" href="sisu-lock-screen.html">Logout</a></li>
+                    <li><a class="dropdown-item" href="/users/settings">Settings</a></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 </ul>
             </li>
         </ul>

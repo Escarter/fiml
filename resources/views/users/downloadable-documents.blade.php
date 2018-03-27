@@ -34,11 +34,13 @@
             </div>
         @endforeach 
     @else
-    <div class="media panel ">
-        <div class="media-body">
-            <h4 class="media-heading">Information </h4> 
-            <p>No Downloadable content avaliable yet</p>
-            {{--  <a href="#" class="btn btn-danger">Back to Dashboard</a>  --}}
+    <div class="card mb-5">
+        <div class="card-header">
+                Information
+            </div>
+        <div class="card-body">
+            <h3 class="card-text">No Downloadable content avaliable yet</h3>
+            <a href="/users/dashboard" class="btn btn-red btn-gradient  waves-effect waves-light">Back to Dashboard</a>
         </div>
     </div>
     @endif    

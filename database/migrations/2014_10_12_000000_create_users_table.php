@@ -8,8 +8,6 @@ class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -25,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('location');
             $table->string('avatar')->nullable();
             $table->string('password');
-            $table->enum('status',['Active','Pending','Suspended'])->defualt('Pending');
+            $table->enum('status', ['Active', 'Pending', 'Suspended'])->defualt('Pending');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -33,8 +31,6 @@ class CreateUsersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

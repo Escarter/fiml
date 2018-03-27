@@ -1,33 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
-<!-- ============================================================== -->
-<!-- Page Content                                                   -->
-<!-- ============================================================== -->
-<div class="container-fluid"> 
-    <div class="row bg-title">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Training Content Management </h4> </div>
-        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
-        
-            <ol class="breadcrumb">
-                <li><a href="#">Dashboard</a></li>
-                <li class="active">Training Content Management</li>
-            </ol>
-        </div>
-        <!-- /.col-lg-12 -->
+<div class="row pb-0">
+    <div class="col-md-12">
+        <h1>Training Content Management</h1>
     </div>
+</div>
     <!-- .row -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="white-box">
-                <h3 class="box-title">Training Content Management</h3>
+    <div class="row mb-5">
+        <div class="col-md-12 card">
+            <div class="card-body">
                 <div>
-                    <button class="btn btn-inverse pull-right" data-toggle="modal" data-target="#createTrainingContentModal" ><i class="mdi mdi-plus-box"></i> Training Content</button>
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#createTrainingContentModal" ><i class="fa fa-plus"></i> Training Content</button>
                 </div>
                 <div class="clearfix"></div>
-
-                <hr>
                 
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissable">
@@ -45,41 +31,50 @@
 
                 @if ($trainingContents->count()>0)
                 <div class="table-responsive">
-                    <div id="example23_wrapper" class="dataTables_wrapper">
-                        <div class="dt-buttons">
-                            <a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a>
-                            <a class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a>
-                            <a class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a>
-                            <a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a>
-                            <a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a>
-                        </div>
-                        <br><hr>
+                    <div class="dt-buttons">
+                        <a class="dt-button buttons-copy buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Copy</span></a>
+                        <a class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>CSV</span></a>
+                        <a class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>Excel</span></a>
+                        <a class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23" href="#"><span>PDF</span></a>
+                        <a class="dt-button buttons-print" tabindex="0" aria-controls="example23" href="#"><span>Print</span></a>
+                    </div>
+                    <br><hr>
                         
-                        <table id="myTable" class="display nowrap dataTable table  contact-list" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Title: activate to sort column descending" style="width: 290px;">Title</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 422px;">Category</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending" style="width: 220px;">Type</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-label="Content: activate to sort column ascending" style="width: 220px;">Content</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-label="Url: activate to sort column ascending" style="width: 157px;">URL</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-label="created date: activate to sort column ascending" style="width: 263px;">created Date</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example23" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 198px;">Action</th>
-                                </tr>
+                    <table id="datatable-1" class="table table-datatable align-middle table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Content</th>
+                                <th>URL</th>
+                                <th>created Date</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
                             <tbody>
-                
                                 @foreach ($trainingContents as $trainingContent)
-                                <tr role="row" >
-                                    <td><img src="{{asset('storage/coverImages/'.$trainingContent->cover_image)}}" alt="training-cover-image" class="img-rounded"> {{$trainingContent->title}} </td>
-                                    <td>{{$trainingContent->category->name }}</td>
+                                <tr>
+                                    <td><img src="{{asset('storage/coverImages/'.$trainingContent->cover_image)? asset('storage/coverImages/'.$trainingContent->cover_image): '/img/profile-pic-1.jpg'}}" alt="training-cover-image" class="profile-picture"> {{$trainingContent->title}} </td>
+                                    
+                                    <td>
+                                        @if ($trainingContent->category->name  == 'Forex Trainings')
+                                            <span class="badge badge-danger">{{$trainingContent->category->name }}</span>
+                                        @elseif($trainingContent->category->name  == 'FIML Training')
+                                            <span class="badge badge-secondary" >{{$trainingContent->category->name}}</span>
+                                        @elseif($trainingContent->category->name  == 'Binary Trainings')
+                                            <span class="badge badge-info" >{{$trainingContent->category->name}}</span>
+                                        @else
+                                          <span class="badge badge-success" >{{$trainingContent->category->name}}</span>
+                                        @endif
+                                    </td>
                                     <td>{{$trainingContent->type}}</td>
                                     <td>{{str_limit($trainingContent->content, 20)}}</td>
                                     <td>{{str_limit($trainingContent->url,20)}}</td>
                                     <td>{{$trainingContent->created_at->diffForHumans()}}</td>
                                     <td>
-                                        <button data-id="{{$trainingContent->id}}" data-url="/admin/edit-training-content/" data-toggle="modal" data-target="#editTrainingContentModal" class="btn btn-warning btn-outline btn-circle btn-md m-r-5"><i class="ti-pencil-alt"></i></button>
-                                        <button  data-id="{{$trainingContent->id}}" data-url="/admin/delete-training-content/" class="btn btn-danger btn-outline btn-circle btn-md m-r-5 deleteTrainingContentBtn"><i class="ti-trash"></i></button>
+                                        <button data-id="{{$trainingContent->id}}" data-url="/admin/edit-training-content/" data-toggle="modal" data-target="#editTrainingContentModal" class="btn btn-secondary waves-effect waves-light btn-sm"><i class="fa fa-pencil fa-5x"></i></button>
+                                        <button  data-id="{{$trainingContent->id}}" data-url="/admin/delete-training-content/" class="btn btn-red waves-effect waves-light deleteTrainingContentBtn btn-sm"><i class="fa fa-remove fa-5x"></i></button>
                                     </td>
                                  </tr>
                                 @endforeach
@@ -90,6 +85,8 @@
                 @else
                     <h4>Information </h4> 
                     <p>No Training content created yet</p>
+                    <br>
+                    <button class="btn btn-gradient btn-primary " data-toggle="modal" data-target="#createTrainingContentModal" ><i class="fa fa-plus"></i> Training Content</button>
                     {{--  <a href="#" class="btn btn-danger">Back to Dashboard</a>  --}}
                 @endif
             </div>      

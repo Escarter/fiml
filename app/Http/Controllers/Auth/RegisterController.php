@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-
-
 class RegisterController extends Controller
 {
     /*
@@ -34,8 +32,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -45,7 +41,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -56,7 +53,7 @@ class RegisterController extends Controller
             'phone' => 'required',
             'sex' => 'required',
             'location' => 'required',
-            'dob'=>'required',
+            'dob' => 'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -65,22 +62,23 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \App\User
      */
     protected function create(array $data)
     {
-
-        $dob = date("Y-m-d H:i:s",strtotime($data['dob']));
-        $user =  User::create([
+        $dob = date('Y-m-d H:i:s', strtotime($data['dob']));
+        $user = User::create([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
                     'phone' => $data['phone'],
                     'sex' => $data['sex'],
-                    'dob'=> $dob,
+                    'dob' => $dob,
                     'location' => $data['location'],
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
+                    'status' => 'Pending',
                 ]);
         $user->assign('user');
 
@@ -90,21 +88,19 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
         $validator = $this->validator($request->all());
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $this->create($request->all());
 
-        return redirect('/login')->with('status','Congrats for your registration login to join the amazing family.');
+        return redirect('/login')->with('status', 'Congrats for your registration login to join the amazing family.');
     }
-
-
 }

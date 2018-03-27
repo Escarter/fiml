@@ -1,10 +1,11 @@
 <div class="modal fade" id="editDownloadContentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content p-2">
                 <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel1"><i class="mdi mdi-plus-box"></i>  Update Downloadable Content</h4> 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel1"><i class="mdi mdi-plus-box"></i>  Update Downloadable Content</h4> </div>
-                <div class="modal-body">
+                </div>
+                <div class="modal-body p-3">
                     <form method="POST" action="/admin/edit-download-content" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row ">
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary"><i class="mdi mdi-plus-box"></i> Update Downloadable</button>
                 </form>
                 </div>

@@ -1,307 +1,780 @@
 @extends('layouts.master')
 
 @section('content')
-<!-- ============================================================== -->
-<!-- Page Content                                                   -->
-<!-- ============================================================== -->
-<div id="page-wrapper">
-    <div class="container-fluid"> 
-        <!-- .row -->
-        <div class="row">
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Total Visit</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">8659</span></li>
-                        </ul>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+        <div class="card card-tile card-xs bg-primary bg-gradient text-center">
+            <div class="card-body p-4">
+                <!-- Accepts .invisible: Makes the items. Use this only when you want to have an animation called on it later -->
+                <div class="tile-left">
+                    <i class="batch-icon batch-icon-user-alt batch-icon-xxl"></i>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">1,359</div>
+                    <div class="tile-description">Customers Online</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+        <div class="card card-tile card-xs bg-secondary bg-gradient text-center">
+            <div class="card-body p-4">
+                <div class="tile-left">
+                    <i class="batch-icon batch-icon-tag-alt-2 batch-icon-xxl"></i>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">$7,349.90</div>
+                    <div class="tile-description">Today's Sales</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+        <div class="card card-tile card-xs bg-primary bg-gradient text-center">
+            <div class="card-body p-4">
+                <div class="tile-left">
+                    <i class="batch-icon batch-icon-list batch-icon-xxl"></i>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">26</div>
+                    <div class="tile-description">Open Tickets</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-3 mb-5">
+        <div class="card card-tile card-xs bg-secondary bg-gradient text-center">
+            <div class="card-body p-4">
+                <div class="tile-left">
+                    <i class="batch-icon batch-icon-star batch-icon-xxl"></i>
+                </div>
+                <div class="tile-right">
+                    <div class="tile-number">476</div>
+                    <div class="tile-description">New Orders</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-8 mb-5">
+        <div class="card">
+            <div class="card-header">
+                Sales Overview
+                <div class="header-btn-block">
+                    <span class="data-range dropdown">
+                        <a href="#" class="btn btn-primary dropdown-toggle" id="navbar-dropdown-sales-overview-header-button" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                            <i class="batch-icon batch-icon-calendar"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown-sales-overview-header-button">
+                            <a class="dropdown-item" href="today">Today</a>
+                            <a class="dropdown-item" href="week">This Week</a>
+                            <a class="dropdown-item" href="month">This Month</a>
+                            <a class="dropdown-item active" href="year">This Year</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-chart" data-chart-color-1="#07a7e3" data-chart-color-2="#32dac3" data-chart-legend-1="Sales ($)" data-chart-legend-2="Orders" data-chart-height="281">
+                    <canvas id="sales-overview"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xl-4 mb-5">
+        <div class="card card-md">
+            <div class="card-header">
+                Traffic Sources
+                <div class="header-btn-block">
+                    <span class="data-range dropdown">
+                        <a href="#" class="btn btn-primary dropdown-toggle" id="navbar-dropdown-traffic-sources-header-button" data-toggle="dropdown" data-flip="false" aria-haspopup="true" aria-expanded="false">
+                            <i class="batch-icon batch-icon-calendar"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right"  aria-labelledby="navbar-dropdown-traffic-sources-header-button">
+                            <a class="dropdown-item" href="today">Today</a>
+                            <a class="dropdown-item" href="week">This Week</a>
+                            <a class="dropdown-item" href="month">This Month</a>
+                            <a class="dropdown-item active" href="year">This Year</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="card-body text-center">
+                <p class="text-left">Your top 5 traffic sources</p>
+                <div class="card-chart" data-chart-color-1="#07a7e3" data-chart-color-2="#32dac3" data-chart-color-3="#4f5b60" data-chart-color-4="#FCCF31" data-chart-color-5="#f43a59">
+                    <canvas id="traffic-source"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-4 mb-5">
+        <div class="card card-sm bg-info">
+            <div class="card-body">
+                <div class="mb-4 clearfix">
+                    <div class="float-left text-warning text-left">
+                        <i class="fa fa-twitter batch-icon-xxl"></i>
+                    </div>
+                    <div class="float-right text-right">
+                        <h6 class="m-0">Twitter Followers</h6>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Total Page Views</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash2"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">7469</span></li>
-                        </ul>
+                <div class="text-right clearfix">
+                    <div class="display-4">65,452</div>
+                    <div class="m-0">+72 Today</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-5">
+        <div class="card card-sm">
+            <div class="card-body">
+                <div class="mb-4 clearfix">
+                    <div class="float-left text-warning text-left">
+                        <i class="batch-icon batch-icon-star batch-icon-xxl"></i>
+                    </div>
+                    <div class="float-right text-right">
+                        <h6 class="m-0">Reviews</h6>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Unique Visitor</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash3"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">6011</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Bounce Rate</h3>
-                        <ul class="list-inline two-part">
-                            <li>
-                                <div id="sparklinedash4"></div>
-                            </li>
-                            <li class="text-right"><i class="ti-arrow-down text-danger"></i> <span class="text-danger">18%</span></li>
-                        </ul>
+                <div class="text-right clearfix">
+                    <div class="display-4">7,842</div>
+                    <div class="m-0">
+                        <a href="#">Read More</a>
                     </div>
                 </div>
             </div>
-            <!--/.row -->
-            <!-- .row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="white-box">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <h3 class="box-title">Sales in 2016</h3>
-                                <p class="m-t-30">Lorem ipsum dolor sit amet, ectetur adipiscing elit. viverra tellus. ipsumdolorsitda amet, ectetur adipiscing elit.</p>
-                                <p>
-                                    <br/> Ectetur adipiscing elit. viverra tellus.ipsum dolor sit amet, dag adg ecteturadipiscingda elitdglj. vadghiverra tellus.</p>
-                            </div>
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <div id="morris-area-chart" style="height:250px;"></div>
-                            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-4 mb-5">
+        <div class="card card-sm bg-danger">
+            <div class="card-body">
+                <div class="mb-4 clearfix">
+                    <div class="float-left text-left">
+                        <i class="batch-icon batch-icon-reply batch-icon-xxl"></i>
+                    </div>
+                    <div class="float-right text-right">
+                        <h6 class="m-0">Products Returned</h6>
+                    </div>
+                </div>
+                <div class="text-right clearfix">
+                    <div class="display-4">231</div>
+                    <div class="m-0">-4% Today</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-5 col-xl-3 mb-5">
+        <div class="card card-md card-team-members">
+            <div class="card-header">
+                Team Members
+            </div>
+            <div class="card-media-list">
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Johanna Quinn
                         </div>
+                        <div class="subtext">jquinn897</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-3.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Teal'c Jaffa
+                        </div>
+                        <div class="subtext">tealc</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-secondary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-2.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Samantha Carter
+                        </div>
+                        <div class="subtext">samanthac</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-secondary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-4.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            General Landry
+                        </div>
+                        <div class="subtext">glandry</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-primary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-6.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Jacklin O'neil
+                        </div>
+                        <div class="subtext">jakjak</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Johanna Quinn
+                        </div>
+                        <div class="subtext">jquinn897</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-3.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Teal'c Jaffa
+                        </div>
+                        <div class="subtext">tealc</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-secondary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-2.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Samantha Carter
+                        </div>
+                        <div class="subtext">samanthac</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-secondary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-4.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            General Landry
+                        </div>
+                        <div class="subtext">glandry</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="profiles-member-profile.html">
+                    <div class="profile-picture bg-gradient bg-primary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-6.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Jacklin O'neil
+                        </div>
+                        <div class="subtext">jakjak</div>
                     </div>
                 </div>
             </div>
-            <!--/.row -->
-            <!-- .row -->
-            <div class="row">
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">Weather</h3>
-                        <div class="weather-box">
-                            <div class="weather-top">
-                                <h2 class="pull-left">Monday <br>
-              <small>7th May 2016</small></h2>
-                                <div class="today_crnt pull-right">
-                                    <canvas class="sleet" width="44" height="44"></canvas> <span>32<sup>°F</sup></span> </div>
-                            </div>
-                            <div class="weather-info">
-                                <h5 class="font-bold">Weather info</h5>
-                                <div class="row">
-                                    <div class="col-xs-6 p-r-10">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="pull-left">Wind</p>
-                                                <p class="pull-right font-bold">16km/h</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="pull-left">Sunrise</p>
-                                                <p class="pull-right font-bold">05:20</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="pull-left">Humanfeel</p>
-                                                <p class="pull-right font-bold">32 <sup>°F</sup></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 p-l-10">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="pull-left">Sunset</p>
-                                                <p class="pull-right font-bold">21:05</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <p class="pull-left">Pressure </p>
-                                                <p class="pull-right font-bold">22 in</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="weather-time">
-                                <ul class="list-unstyled weather-days row">
-                                    <li class="col-xs-4 col-sm-2"><span>Tue</span>
-                                        <canvas class="sleet" width="30" height="30"></canvas> <span>32<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Wed</span>
-                                        <canvas class="clear-day" width="30" height="30"></canvas> <span>34<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Thu</span>
-                                        <canvas class="partly-cloudy-day" width="30" height="30"></canvas> <span>35<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Fri</span>
-                                        <canvas class="cloudy" width="30" height="30"></canvas> <span>34<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Sat</span>
-                                        <canvas class="snow" width="30" height="30"></canvas> <span>30<sup>°F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>Sun</span>
-                                        <canvas class="wind" width="30" height="30"></canvas> <span>26<sup>°F</sup></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">User Activity</h3>
-                        <div class="steamline">
-                            <div class="sl-item">
-                                <div class="sl-left"> <img class="img-circle" alt="user" src="../plugins/images/users/genu.jpg"> </div>
-                                <div class="sl-right">
-                                    <div><a href="#">Gohn Doe</a> <span class="sl-date">5 minutes ago</span></div>
-                                    <p>Contrary to popular belief</p>
-                                </div>
-                            </div>
-                            <div class="sl-item">
-                                <div class="sl-left"> <img class="img-circle" alt="user" src="../plugins/images/users/ritesh.jpg"> </div>
-                                <div class="sl-right">
-                                    <div><a href="#">Gohn Doe</a> <span class="sl-date">5 minutes ago</span></div>
-                                    <p>Lorem Ipsum is simply dummy</p>
-                                </div>
-                            </div>
-                            <div class="sl-item">
-                                <div class="sl-left"> <img class="img-circle" alt="user" src="../plugins/images/users/sonu.jpg"> </div>
-                                <div class="sl-right">
-                                    <div><a href="#">Gohn Doe</a> <span class="sl-date">5 minutes ago</span></div>
-                                    <p>The standard chunk of ipsum </p>
-                                </div>
-                            </div>
-                            <div class="sl-item">
-                                <div class="sl-left"> <img class="img-circle" alt="user" src="../plugins/images/users/ritesh.jpg"> </div>
-                                <div class="sl-right">
-                                    <div><a href="#">Gohn Doe</a> <span class="sl-date">5 minutes ago</span></div>
-                                    <p>Contrary to popular belief</p>
-                                </div>
-                            </div>
-                            <div class="sl-item">
-                                <div class="sl-left"> <img class="img-circle" alt="user" src="../plugins/images/users/govinda.jpg"> </div>
-                                <div class="sl-right">
-                                    <div><a href="#">Gohn Doe</a> <span class="sl-date">5 minutes ago</span></div>
-                                    <p>The generated lorem ipsum</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">Feeds</h3>
-                        <ul class="feeds">
-                            <li>
-                                <div class="bg-info"><i class="fa fa-bell-o text-white"></i></div> You have 4 pending tasks. <span class="text-muted">Just Now</span></li>
-                            <li>
-                                <div class="bg-success"><i class="ti-server text-white"></i></div> Server #1 overloaded.<span class="text-muted">2 Hours ago</span></li>
-                            <li>
-                                <div class="bg-warning"><i class="ti-shopping-cart text-white"></i></div> New order received.<span class="text-muted">31 May</span></li>
-                            <li>
-                                <div class="bg-danger"><i class="ti-user text-white"></i></div> New user registered.<span class="text-muted">30 May</span></li>
-                            <li>
-                                <div class="bg-inverse"><i class="fa fa-bell-o text-white"></i></div> New Version just arrived. <span class="text-muted">27 May</span></li>
-                            <li>
-                                <div class="bg-purple"><i class="ti-settings text-white"></i></div> You have 4 pending tasks. <span class="text-muted">27 May</span></li>
-                        </ul>
-                    </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-7 col-xl-6 mb-5">
+        <div class="card card-md card-customer-location">
+            <div class="card-header">
+                Customer Location
+            </div>
+            <div class="card-body">
+                <div class="card-chart" data-chart-color-selected="#07a7e3">
+                    <div id="customer-location"></div>
                 </div>
             </div>
-            <!--/.row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="white-box">
-                        <h3 class="box-title">Order Status</h3>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Invoice</th>
-                                        <th>User</th>
-                                        <th>Order date</th>
-                                        <th>Amount</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">Tracking Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link"> Order #53431</a></td>
-                                        <td>Steve N. Horton</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 22, 2014</span></td>
-                                        <td>$45.00</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-success">Paid</div>
-                                        </td>
-                                        <td class="text-center">-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link"> Order #53432</a></td>
-                                        <td>Charles S Boyle</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 24, 2014</span></td>
-                                        <td>$245.30</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-info">Shipped</div>
-                                        </td>
-                                        <td class="text-center"><i class="fa fa-plane"></i> CGX0089734531</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link"> Order #53433</a></td>
-                                        <td>Lucy Doe</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 24, 2014</span></td>
-                                        <td>$38.00</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-info">Shipped</div>
-                                        </td>
-                                        <td class="text-center"><i class="fa fa-plane"></i> CGX0089934571</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link"> Order #53434</a></td>
-                                        <td>Teresa L. Doe</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 15, 2014</span></td>
-                                        <td>$77.99</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-info">Shipped</div>
-                                        </td>
-                                        <td class="text-center"><i class="fa fa-plane"></i> CGX0089734574</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link"> Order #53435</a></td>
-                                        <td>Teresa L. Doe</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 12, 2014</span></td>
-                                        <td>$18.00</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-success">Paid</div>
-                                        </td>
-                                        <td class="text-center">-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link">Order #53437</a></td>
-                                        <td>Charles S Boyle</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 17, 2014</span></td>
-                                        <td>$658.00</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-danger">Refunded</div>
-                                        </td>
-                                        <td class="text-center">-</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="javascript:void(0)" class="btn-link">Order #536584</a></td>
-                                        <td>Scott S. Calabrese</td>
-                                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> Oct 19, 2014</span></td>
-                                        <td>$45.58</td>
-                                        <td class="text-center">
-                                            <div class="label label-table label-warning">Unpaid</div>
-                                        </td>
-                                        <td class="text-center">-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+        </div>
+    </div>
+    <div class="col-xl-3 col-xl-3 mb-5">
+        <div class="row mb-4">
+            <div class="col-sm-12">
+                <div class="card card-sm bg-primary bg-gradient text-center">
+                    <div class="card-body">
+                        <i class="batch-icon batch-icon-database batch-icon-xxl"></i>
+                        <h6 class="mt-1">Database Load</h6>
+                        <div class="card-chart" data-chart-color-1="#FFFFFF" data-chart-color-2="#FFFFFF">
+                            <canvas id="database-load"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
-    {{-- End of container-fluid --}}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-sm bg-secondary bg-gradient text-center">
+                    <div class="card-body">
+                        <div class="card-chart" data-chart-color-1="#FFFFFF" data-chart-color-2="#FFFFFF" data-chart-color-2="#FFFFFF">
+                            <canvas id="profit-loss"></canvas>
+                        </div>
+                        <h6>Profit/Loss (18 Months)</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /#page-wrapper -->
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-xl-4 mb-5">
+        <div class="card card-task card-md">
+            <div class="card-header">
+                Task List
+                <p class="task-list-stats">
+                    <span class="task-list-completed">0</span> of <span class="task-list-total">0</span> tasks completed
+                </p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-sm bg-gradient" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                </div>
+                <div class="header-btn-block">
+                    <a href="task-manager.html" class="btn btn-primary">
+                        <i class="batch-icon batch-icon-add"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-task-list">
+                <ul class="task-list">
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label">Mauris rutrum quam at porta feugiat</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label"><span class="badge badge-danger">Critical</span>Mauris rutrum quam at porta feugiat</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label">Fusce in felis nec exdf</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked>
+                            <label class="custom-control-label"><span class="badge badge-warning">High Priority</span>Aliquam vel tristique ipsum</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked>
+                            <label class="custom-control-label"><span class="badge badge-primary">Optional</span>Aenean vehicula, ligula sit amet varius maximus</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked>
+                            <label class="custom-control-label">Etiam varius neque sed sagittis fringilla</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label">Mauris rutrum quam at porta feugiat</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked>
+                            <label class="custom-control-label"><span class="badge badge-info">Low Priority</span>Sed velit augue, tincidunt vitae posuere</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label"><span class="badge badge-warning">High Priority</span>Fusce in felis nec exdf</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label"><span class="badge badge-info">Low Priority</span>Aliquam vel tristique ipsum</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label"><span class="badge badge-info">Low Priority</span> Aenean vehicula, ligula sit amet varius maximus</label>
+                        </div>
+                    </li>
+                    <li class="task-list-item">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" checked>
+                            <label class="custom-control-label">Etiam varius neque sed sagittis fringilla</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-xl-3 mb-5">
+        <div class="card card-md bg-primary bg-gradient text-center card-goal-reached">
+            <!-- Accepts qp-animate-type which contains an optional animation type from animate.css -->
+            <div class="card-body">
+                <h6 class="my-5">Goal Reached</h6>
+                <i class="batch-icon batch-icon-bullhorn batch-icon-xxl"></i>
+                <div class="display-4 mt-3">4,294</div>
+                <p>of 4,000 Target Downloads</p>
+                <p>Congratulations! You surpassed your target goal.</p>
+                <a class="btn btn-secondary">See Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-5 mb-5">
+        <div class="card card-activity card-md">
+            <div class="card-header">
+                Activity
+            </div>
+            <div class="card-media-list">
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            You were assigned a new task.
+                        </div>
+                        <div class="subtext">by Johanna Quinn</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-3.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Teal'c Jaffa was added to your team members.
+                        </div>
+                        <div class="subtext">by George Hammond</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-secondary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-2.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            A task was escalated from <span class="badge badge-info">Low priority</span> to <span class="badge badge-danger">Urgent</span>.
+                        </div>
+                        <div class="subtext">by Samantha Carter</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-secondary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-4.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            A task was marked as <span class="badge badge-success">Completed</span>.
+                        </div>
+                        <div class="subtext">by General Landry</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-primary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-6.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            A new project was created.
+                        </div>
+                        <div class="subtext">by Jacklin O'neil</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            You were assigned a new task.
+                        </div>
+                        <div class="subtext">by Johanna Quinn</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-3.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            Teal'c Jaffa was added to your team members.
+                        </div>
+                        <div class="subtext">by George Hammond</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-secondary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-2.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            A task was escalated from <span class="badge badge-info">Low priority</span> to <span class="badge badge-danger">Urgent</span>.
+                        </div>
+                        <div class="subtext">by Samantha Carter</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-secondary has-message float-right d-flex mr-3">
+                        <img src="/img/profile-pic-4.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            A task was marked as <span class="badge badge-success">Completed</span>.
+                        </div>
+                        <div class="subtext">by General Landry</div>
+                    </div>
+                </div>
+
+                <div class="media clickable" data-qp-link="task-list.html">
+                    <div class="profile-picture bg-gradient bg-primary float-right d-flex mr-3">
+                        <img src="/img/profile-pic-6.jpg" width="44" height="44">
+                    </div>
+                    <div class="media-body">
+                        <div class="heading mt-1">
+                            A new project was created.
+                        </div>
+                        <div class="subtext">by Jacklin O'neil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                User Management
+            </div>
+            <div class="card-table table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Member</th>
+                            <th>Email</th>
+                            <th class="text-center">Status</th>
+                            <th>Created</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                                        <img src="/img/profile-pic.jpg" width="44" height="44">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="heading mt-1">
+                                            Johanna Quinn
+                                        </div>
+                                        <div class="subtext">jquinn897</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">johanna.quinn@quillpro.com</a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-primary">Approved</span>
+                            </td>
+                            <td>23rd Feb 2017</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary">
+                                    <i class="batch-icon batch-icon-eye"></i>
+                                </a>
+                                <a class="btn btn-success">
+                                    <i class="batch-icon batch-icon-quill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="profile-picture bg-gradient bg-primary has-message float-right d-flex mr-3">
+                                        <img src="/img/profile-pic-3.jpg" width="44" height="44">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="heading mt-1">
+                                            Teal'c Jaffa
+                                        </div>
+                                        <div class="subtext">tealc</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">tealc.jaffa@kawoosh.com</a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-success">Reviewing</span>
+                            </td>
+                            <td>15th Jan 2017</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary">
+                                    <i class="batch-icon batch-icon-eye"></i>
+                                </a>
+                                <a class="btn btn-success">
+                                    <i class="batch-icon batch-icon-quill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="profile-picture bg-gradient bg-secondary float-right d-flex mr-3">
+                                        <img src="/img/profile-pic-2.jpg" width="44" height="44">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="heading mt-1">
+                                            Samantha Carter
+                                        </div>
+                                        <div class="subtext">samanthac</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">samantha.carter@sgc.com</a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-danger">Rejected</span>
+                            </td>
+                            <td>7th Jan 2017</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary">
+                                    <i class="batch-icon batch-icon-eye"></i>
+                                </a>
+                                <a class="btn btn-success">
+                                    <i class="batch-icon batch-icon-quill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="profile-picture bg-gradient bg-secondary has-message float-right d-flex mr-3">
+                                        <img src="/img/profile-pic-4.jpg" width="44" height="44">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="heading mt-1">
+                                            General Landry
+                                        </div>
+                                        <div class="subtext">glandry</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">g.landry@sgc.com</a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-warning">Pending</span>
+                            </td>
+                            <td>7th Jan 2017</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary">
+                                    <i class="batch-icon batch-icon-eye"></i>
+                                </a>
+                                <a class="btn btn-success">
+                                    <i class="batch-icon batch-icon-quill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="profile-picture bg-gradient bg-primary float-right d-flex mr-3">
+                                        <img src="/img/profile-pic-5.jpg" width="44" height="44">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="heading mt-1">
+                                            Daniella Jackson
+                                        </div>
+                                        <div class="subtext">jacksond</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">daniella.jackson@chabaai.com</a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-default">Banned</span>
+                            </td>
+                            <td>5th Jan 2017</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary">
+                                    <i class="batch-icon batch-icon-eye"></i>
+                                </a>
+                                <a class="btn btn-success">
+                                    <i class="batch-icon batch-icon-quill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="profile-picture bg-gradient bg-primary float-right d-flex mr-3">
+                                        <img src="/img/profile-pic-6.jpg" width="44" height="44">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="heading mt-1">
+                                            Jacklin O'neil
+                                        </div>
+                                        <div class="subtext">jakjak</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">jack.oneill@ancientgene.com</a>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge badge-info">Action Required</span>
+                            </td>
+                            <td>1st Jan 2017</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary">
+                                    <i class="batch-icon batch-icon-eye"></i>
+                                </a>
+                                <a class="btn btn-success">
+                                    <i class="batch-icon batch-icon-quill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
